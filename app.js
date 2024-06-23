@@ -20,14 +20,19 @@ let disableButtons = () => {
 
 let checkWinner = ()=>{
     for(let arr of win){
-        if(btn[arr[0]].innerHTML !== ""  && btn[arr[1]].innerHTML !== "" && btn[arr[2]].innerHTML !== ""){
-            if(btn[arr[0]].innerHTML === btn[arr[1]].innerHTML && btn[arr[1]].innerHTML === btn[arr[2]].innerHTML){
-                heading.innerHTML = "Winner : " + btn[arr[0]].innerHTML ;
+        let [a , b , c] = arr ;
+        if(btn[a].innerHTML !== ""  && btn[b].innerHTML !== "" && btn[c].innerHTML !== ""){
+            if(btn[a].innerHTML === btn[b].innerHTML && btn[b].innerHTML === btn[c].innerHTML){
+                heading.innerHTML = "Winner : " + btn[a].innerHTML ;
                 reset.innerText = "New Game";
                 disableButtons();
+                btn[a].style.backgroundColor = "#00ff00d1";
+                btn[b].style.backgroundColor = "#00ff00d1";
+                btn[c].style.backgroundColor = "#00ff00d1";
             }
         }
     }
+    heading.innerText = "Turn : " + ( xTurn ? "X" : "O" );
 }
 let resetGame = ()=>{
     reset.innerText = "New Game";
@@ -35,8 +40,9 @@ let resetGame = ()=>{
     xTurn = true ;
     for(let b of btn){
         b.innerHTML = "";
+        b.style.pointerEvents = "auto";
+        b.style.backgroundColor = "#f7f7ff";
     }
-    b.style.pointerEvents = "auto";
 }
 reset.addEventListener("click" , ()=>{
     resetGame() ;
